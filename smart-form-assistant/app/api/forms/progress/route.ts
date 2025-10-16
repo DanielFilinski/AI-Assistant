@@ -1,0 +1,61 @@
+import { NextResponse } from 'next/server';
+import { Database } from '@/lib/db';
+import { SessionManager } from '@/lib/session';
+import { getSessionToken } from '@/lib/auth';
+import { Env } from '@/lib/types';
+
+export const runtime = 'edge';
+
+export async function GET() {
+  try {
+    const token = await getSessionToken();
+
+    if (!token) {
+      return NextResponse.json(
+        { success: false, error: 'Not authenticated' },
+        { status: 401 }
+      );
+    }
+
+    const env = (process.env as any) as Env;
+    
+    if (!env.DB || !env.SESSIONS) {
+      return NextResponse.json(
+        { success: false, error: 'Database not configured' },
+        { status: 500 }
+      );
+    }
+
+    const sessionManager = new SessionManager(env.SESSIONS);
+    const session = await sessionManager.getSession(token);
+
+    if (!session) {
+      return NextResponse.json(
+        { success: false, error: 'Invalid or expired session' },
+        { status: 401 }
+      );
+    }
+
+    const db = new Database(env.DB);
+    const progress = await db.getFormProgress(session.userId);
+
+    if (!progress) {
+      return NextResponse.json({
+        success: true,
+        data: null,
+      });
+    }
+
+    return NextResponse.json({
+      success: true,
+      data: progress,
+    });
+  } catch (error) {
+    console.error('Get progress error:', error);
+    return NextResponse.json(
+      { success: false, error: 'Failed to get form progress' },
+      { status: 500 }
+    );
+  }
+}
+

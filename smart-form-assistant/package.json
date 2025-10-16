@@ -1,0 +1,43 @@
+{
+  "name": "smart-form-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "pages:deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
+    "pages:watch": "npx @cloudflare/next-on-pages --watch",
+    "pages:dev": "npx wrangler pages dev .vercel/output/static --compatibility-date=2024-01-01",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "db:create": "wrangler d1 create forms_db",
+    "db:migrate": "wrangler d1 execute forms_db --file=./schema.sql",
+    "kv:create": "wrangler kv namespace create SESSIONS"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "nanoid": "^5.1.6",
+    "next": "15.5.5",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.65.0",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
+    "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.56.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.5",
+    "tailwindcss": "^4",
+    "typescript": "^5",
+    "wrangler": "^4.43.0"
+  }
+}
