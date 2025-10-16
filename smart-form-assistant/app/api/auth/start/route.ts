@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { authStartSchema } from '@/lib/schemas';
 import { Database } from '@/lib/db';
 import { MagicLinkManager } from '@/lib/session';
-import { Env } from '@/lib/types';
+import { getCloudflareEnv } from '@/lib/cloudflare';
 
 export const runtime = 'edge';
 
@@ -12,9 +12,13 @@ export async function POST(request: Request) {
     const { email } = authStartSchema.parse(body);
 
     // Get Cloudflare bindings
-    const env = (process.env as any) as Env;
+    const env = getCloudflareEnv();
     
-    if (!env.DB || !env.SESSIONS) {
+    if (!env?.DB || !env?.SESSIONS) {
+      console.error('Environment bindings not available:', { 
+        hasDB: !!env?.DB, 
+        hasSESSIONS: !!env?.SESSIONS
+      });
       return NextResponse.json(
         { success: false, error: 'Database not configured' },
         { status: 500 }

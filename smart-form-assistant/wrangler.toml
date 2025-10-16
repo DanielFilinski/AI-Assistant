@@ -15,3 +15,8 @@ id = "6d5e3e873bb348b79ae97c22445c1bb2"
 [vars]
 NODE_ENV = "production"
 
+# Add your Gemini API key as a secret:
+# wrangler pages secret put GEMINI_API_KEY
+# Or for local development, add to .dev.vars:
+# GEMINI_API_KEY=your_api_key_here
+

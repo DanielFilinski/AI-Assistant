@@ -1,0 +1,303 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@cloudflare/next-on-pages": {
+      "name": "@cloudflare/next-on-pages",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "cookie",
+        "esbuild",
+        "vercel"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@cloudflare/next-on-pages"
+      ],
+      "fixAvailable": false
+    },
+    "@vercel/express": {
+      "name": "@vercel/express",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@vercel/node"
+      ],
+      "effects": [
+        "vercel"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@vercel/express"
+      ],
+      "fixAvailable": false
+    },
+    "@vercel/gatsby-plugin-vercel-builder": {
+      "name": "@vercel/gatsby-plugin-vercel-builder",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "esbuild"
+      ],
+      "effects": [
+        "@vercel/static-build"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@vercel/gatsby-plugin-vercel-builder"
+      ],
+      "fixAvailable": false
+    },
+    "@vercel/hono": {
+      "name": "@vercel/hono",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@vercel/node"
+      ],
+      "effects": [
+        "vercel"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@vercel/hono"
+      ],
+      "fixAvailable": false
+    },
+    "@vercel/node": {
+      "name": "@vercel/node",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "esbuild",
+        "path-to-regexp",
+        "undici"
+      ],
+      "effects": [
+        "@vercel/express",
+        "@vercel/hono",
+        "vercel"
+      ],
+      "range": ">=2.3.1",
+      "nodes": [
+        "node_modules/@vercel/node"
+      ],
+      "fixAvailable": false
+    },
+    "@vercel/remix-builder": {
+      "name": "@vercel/remix-builder",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "path-to-regexp"
+      ],
+      "effects": [
+        "vercel"
+      ],
+      "range": "<=2.0.3 || >=5.2.4",
+      "nodes": [
+        "node_modules/@vercel/remix-builder"
+      ],
+      "fixAvailable": false
+    },
+    "@vercel/static-build": {
+      "name": "@vercel/static-build",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@vercel/gatsby-plugin-vercel-builder"
+      ],
+      "effects": [
+        "vercel"
+      ],
+      "range": ">=1.3.0",
+      "nodes": [
+        "node_modules/@vercel/static-build"
+      ],
+      "fixAvailable": false
+    },
+    "cookie": {
+      "name": "cookie",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1103907,
+          "name": "cookie",
+          "dependency": "cookie",
+          "title": "cookie accepts cookie name, path, and domain with out of bounds characters",
+          "url": "https://github.com/advisories/GHSA-pxg6-pf52-xh8x",
+          "severity": "low",
+          "cwe": [
+            "CWE-74"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<0.7.0"
+        }
+      ],
+      "effects": [],
+      "range": "<0.7.0",
+      "nodes": [
+        "node_modules/cookie"
+      ],
+      "fixAvailable": true
+    },
+    "esbuild": {
+      "name": "esbuild",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1102341,
+          "name": "esbuild",
+          "dependency": "esbuild",
+          "title": "esbuild enables any website to send any requests to the development server and read the response",
+          "url": "https://github.com/advisories/GHSA-67mh-4wv8-2f99",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-346"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N"
+          },
+          "range": "<=0.24.2"
+        }
+      ],
+      "effects": [
+        "@cloudflare/next-on-pages",
+        "@vercel/gatsby-plugin-vercel-builder",
+        "@vercel/node"
+      ],
+      "range": "<=0.24.2",
+      "nodes": [
+        "node_modules/@vercel/gatsby-plugin-vercel-builder/node_modules/esbuild",
+        "node_modules/@vercel/node/node_modules/esbuild",
+        "node_modules/esbuild"
+      ],
+      "fixAvailable": false
+    },
+    "path-to-regexp": {
+      "name": "path-to-regexp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1101846,
+          "name": "path-to-regexp",
+          "dependency": "path-to-regexp",
+          "title": "path-to-regexp outputs backtracking regular expressions",
+          "url": "https://github.com/advisories/GHSA-9wv6-86v2-598j",
+          "severity": "high",
+          "cwe": [
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <6.3.0"
+        }
+      ],
+      "effects": [
+        "@vercel/node",
+        "@vercel/remix-builder"
+      ],
+      "range": "4.0.0 - 6.2.2",
+      "nodes": [
+        "node_modules/@vercel/node/node_modules/path-to-regexp",
+        "node_modules/@vercel/remix-builder/node_modules/path-to-regexp"
+      ],
+      "fixAvailable": false
+    },
+    "undici": {
+      "name": "undici",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1101610,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "Use of Insufficiently Random Values in undici",
+          "url": "https://github.com/advisories/GHSA-c76h-2ccp-4975",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-330"
+          ],
+          "cvss": {
+            "score": 6.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:H/A:N"
+          },
+          "range": ">=4.5.0 <5.28.5"
+        },
+        {
+          "source": 1104501,
+          "name": "undici",
+          "dependency": "undici",
+          "title": "undici Denial of Service attack via bad certificate data",
+          "url": "https://github.com/advisories/GHSA-cxrh-j4jr-qwg3",
+          "severity": "low",
+          "cwe": [
+            "CWE-401"
+          ],
+          "cvss": {
+            "score": 3.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<5.29.0"
+        }
+      ],
+      "effects": [
+        "@vercel/node"
+      ],
+      "range": "<=5.28.5",
+      "nodes": [
+        "node_modules/@vercel/node/node_modules/undici"
+      ],
+      "fixAvailable": false
+    },
+    "vercel": {
+      "name": "vercel",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@vercel/express",
+        "@vercel/hono",
+        "@vercel/node",
+        "@vercel/remix-builder",
+        "@vercel/static-build"
+      ],
+      "effects": [
+        "@cloudflare/next-on-pages"
+      ],
+      "range": ">=25.2.1",
+      "nodes": [
+        "node_modules/vercel"
+      ],
+      "fixAvailable": false
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 1,
+      "moderate": 7,
+      "high": 4,
+      "critical": 0,
+      "total": 12
+    },
+    "dependencies": {
+      "prod": 25,
+      "dev": 656,
+      "optional": 97,
+      "peer": 214,
+      "peerOptional": 0,
+      "total": 685
+    }
+  }
+}

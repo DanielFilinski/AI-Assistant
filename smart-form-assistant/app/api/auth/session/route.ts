@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { SessionManager } from '@/lib/session';
 import { getSessionToken } from '@/lib/auth';
-import { Env } from '@/lib/types';
+import { getCloudflareEnv } from '@/lib/cloudflare';
 
 export const runtime = 'edge';
 
@@ -16,9 +16,11 @@ export async function GET() {
       );
     }
 
-    const env = (process.env as any) as Env;
+    // Get Cloudflare bindings
+    const env = getCloudflareEnv();
     
-    if (!env.SESSIONS) {
+    if (!env?.SESSIONS) {
+      console.error('Session storage not configured');
       return NextResponse.json(
         { success: false, error: 'Session storage not configured' },
         { status: 500 }

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { Database } from '@/lib/db';
 import { SessionManager } from '@/lib/session';
 import { getSessionToken } from '@/lib/auth';
-import { Env } from '@/lib/types';
+import { getCloudflareEnv } from '@/lib/cloudflare';
 
 export const runtime = 'edge';
 
@@ -17,9 +17,11 @@ export async function GET() {
       );
     }
 
-    const env = (process.env as any) as Env;
+    // Get Cloudflare bindings
+    const env = getCloudflareEnv();
     
-    if (!env.DB || !env.SESSIONS) {
+    if (!env?.DB || !env?.SESSIONS) {
+      console.error('Service not configured');
       return NextResponse.json(
         { success: false, error: 'Service not configured' },
         { status: 500 }

@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { MagicLinkManager, SessionManager } from '@/lib/session';
 import { Database } from '@/lib/db';
 import { setSessionCookie } from '@/lib/auth';
-import { Env } from '@/lib/types';
+import { getCloudflareEnv } from '@/lib/cloudflare';
 
 export const runtime = 'edge';
 
@@ -15,9 +15,11 @@ export async function GET(request: Request) {
       return NextResponse.redirect(new URL('/login?error=invalid_token', request.url));
     }
 
-    const env = (process.env as any) as Env;
+    // Get Cloudflare bindings
+    const env = getCloudflareEnv();
     
-    if (!env.DB || !env.SESSIONS) {
+    if (!env?.DB || !env?.SESSIONS) {
+      console.error('Environment bindings not available');
       return NextResponse.redirect(
         new URL('/login?error=server_error', request.url)
       );

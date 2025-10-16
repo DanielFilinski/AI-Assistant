@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { SessionManager } from '@/lib/session';
 import { getSessionToken, clearSessionCookie } from '@/lib/auth';
-import { Env } from '@/lib/types';
+import { getCloudflareEnv } from '@/lib/cloudflare';
 
 export const runtime = 'edge';
 
@@ -10,9 +10,10 @@ export async function POST() {
     const token = await getSessionToken();
 
     if (token) {
-      const env = (process.env as any) as Env;
+      // Get Cloudflare bindings
+      const env = getCloudflareEnv();
       
-      if (env.SESSIONS) {
+      if (env?.SESSIONS) {
         const sessionManager = new SessionManager(env.SESSIONS);
         await sessionManager.deleteSession(token);
       }
