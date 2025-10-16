@@ -33,9 +33,9 @@ export default function LoginPage() {
         body: JSON.stringify({ email }),
       });
 
-      const data = await response.json();
+      const data = await response.json() as { success: boolean; data?: { magicLink: string }; error?: string };
 
-      if (data.success) {
+      if (data.success && data.data) {
         setMagicLink(data.data.magicLink);
       } else {
         setError(data.error || 'Failed to send magic link');

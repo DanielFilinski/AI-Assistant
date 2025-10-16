@@ -61,7 +61,7 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
         }),
       });
 
-      const data = await response.json();
+      const data = await response.json() as { success: boolean; error?: string };
 
       if (!data.success) {
         throw new Error(data.error || 'Failed to save progress');
@@ -80,7 +80,7 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const response = await fetch('/api/forms/progress');
-      const data = await response.json();
+      const data = await response.json() as { success: boolean; data?: { formData: FormData; currentStep: number } };
 
       if (data.success && data.data) {
         setFormData(data.data.formData);
@@ -105,7 +105,7 @@ export function FormProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      const data = await response.json() as { success: boolean; error?: string };
 
       if (!data.success) {
         throw new Error(data.error || 'Failed to submit form');

@@ -25,9 +25,9 @@ export default function ResumeImport({ onImport }: ResumeImportProps) {
         body: JSON.stringify({ resumeText }),
       });
 
-      const data = await response.json();
+      const data = await response.json() as { success: boolean; data?: { extracted: any }; error?: string };
 
-      if (data.success) {
+      if (data.success && data.data) {
         setExtracted(data.data.extracted);
       } else {
         setError(data.error || 'Failed to extract data');

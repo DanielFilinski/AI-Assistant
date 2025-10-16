@@ -29,9 +29,9 @@ export default function AIImprove({ text, field, onAccept }: AIImproveProps) {
         body: JSON.stringify({ text, field }),
       });
 
-      const data = await response.json();
+      const data = await response.json() as { success: boolean; data?: { improved: string }; error?: string };
 
-      if (data.success) {
+      if (data.success && data.data) {
         setImproved(data.data.improved);
       } else {
         setError(data.error || 'Failed to improve text');
