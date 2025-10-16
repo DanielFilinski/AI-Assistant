@@ -1,0 +1,25 @@
+# wrangler.toml Configuration Example
+# 
+# This file is renamed to .example to prevent Cloudflare Pages from using it
+# during automatic builds. Pages will use the Build Configuration from the UI instead.
+# 
+# After deploying and creating D1 database and KV namespace:
+# 1. Copy this file to wrangler.toml
+# 2. Update database_id and kv namespace id with actual values
+# 3. Use for local development with: npm run pages:dev
+
+name = "smart-form-assistant"
+compatibility_date = "2024-01-01"
+pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "forms_db"
+database_id = "YOUR_DATABASE_ID_HERE"  # Replace after creating DB
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "YOUR_KV_NAMESPACE_ID_HERE"  # Replace after creating KV namespace
+
+[vars]
+NODE_ENV = "production"
