@@ -1,0 +1,17 @@
+name = "smart-form-assistant"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "forms_db"
+database_id = "82d1b929-7a4a-4cad-aad2-de1e71b69b5a"
+
+[[kv_namespaces]]
+binding = "SESSIONS"
+id = "6d5e3e873bb348b79ae97c22445c1bb2"
+
+[vars]
+NODE_ENV = "production"
+

@@ -46,7 +46,7 @@ next-env.d.ts
 # wrangler
 .wrangler
 .dev.vars
-wrangler.toml
+# wrangler.toml - now tracked for Pages compatibility flags
 
 # lock files (allow npm install with --legacy-peer-deps)
 package-lock.json
