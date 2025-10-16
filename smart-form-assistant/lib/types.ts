@@ -63,11 +63,20 @@ export interface Step4Data {
   expectedSalary?: string;
 }
 
+// Complete form data
+export interface CompleteFormData {
+  step1: Step1Data;
+  step2: Step2Data;
+  step3: Step3Data;
+  step4: Step4Data;
+}
+
+// Partial form data (for progress saving)
 export interface FormData {
-  step1?: Step1Data;
-  step2?: Step2Data;
-  step3?: Step3Data;
-  step4?: Step4Data;
+  step1?: Partial<Step1Data>;
+  step2?: Partial<Step2Data>;
+  step3?: Partial<Step3Data>;
+  step4?: Partial<Step4Data>;
 }
 
 // Session types

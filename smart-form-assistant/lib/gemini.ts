@@ -1,4 +1,4 @@
-import { FormData } from './types';
+import { FormData, CompleteFormData } from './types';
 
 interface GeminiResponse {
   candidates: Array<{
@@ -148,7 +148,7 @@ Return ONLY the improved text without any explanation or additional commentary.`
     };
   }
 
-  async validateForm(formData: FormData): Promise<{
+  async validateForm(formData: CompleteFormData): Promise<{
     issues: Array<{ field: string; message: string; severity: 'warning' | 'suggestion' }>;
     tokensUsed: number;
   }> {

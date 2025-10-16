@@ -126,6 +126,32 @@ This uses `@cloudflare/next-on-pages` to create a Workers-compatible build in `.
 
 ### 8. Deploy to Cloudflare
 
+#### Option A: Deploy via Git (Recommended)
+
+1. Push your code to GitHub/GitLab
+2. Go to Cloudflare Dashboard > Workers & Pages
+3. Click "Create application" > "Pages" > "Connect to Git"
+4. Select your repository
+5. Configure build settings:
+
+**Build configuration:**
+```
+Production branch: main
+Root directory (advanced): smart-form-assistant
+Build command: npm install && npm run build && npm run pages:build
+Build output directory: .vercel/output/static
+```
+
+**Environment variables (Build settings):**
+- **Node.js version**: `18` or `20`
+  (Add environment variable: `NODE_VERSION` = `20`)
+
+6. Click "Save and Deploy"
+
+**Note:** Don't forget to add `GEMINI_API_KEY` in Settings > Environment variables after first deployment.
+
+#### Option B: Manual Deploy via CLI
+
 ```bash
 npm run pages:deploy
 ```
